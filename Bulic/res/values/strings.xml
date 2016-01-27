@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Bulic</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="txt_home">HOME</string>
+    <string name="action_settings">Settings</string>
+    <string-array name="lst_hottest">
+		<item>POP MUSIC</item>
+		<item>HIPHOP MUSIC</item>
+		<item>ROCK MUSIC</item>
+		<item>RHYTHM AND BLUES</item>
+		<item>SOUL MUSIC</item>
+		<item>REGGAE</item>
+		<item>COUNTRY MUSIC</item>
+		<item>FUNK</item>
+		<item>FOLK MUSIC</item>
+		<item>MIDDLE EASTERN MUSIC</item>
+		<item>JAZZ</item>
+		<item>DISCO</item>
+		<item>CLASSICAL MUSIC</item>
+		<item>ELECTRONIC MUSIC</item>
+		<item>LATIN AMERICAN MUSIC</item>
+		<item>BLUES</item>
+		<item>CHILDRENS MUSIC</item>
+		<item>NEW AGE MUSIC</item>
+		<item>VOCAL MUSIC</item>
+		<item>AFRICAN MUSIC</item>
+		<item>CHRISTIAN MUSIC</item>
+		<item>ASIAN MUSIC</item>
+		<item>SKA</item>
+		<item>TRADITIONAL MUSIC</item>
+		<item>INDEPENDENT MUSIC</item>
+	</string-array>
+	<string-array name="list_tab_bar">
+	    <item>HOTTEST</item>
+	    <item>TRENDING</item>
+	    <item>PLAYLIST</item>
+	</string-array>
+</resources>
