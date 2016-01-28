@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:background="@color/backgroud"
     android:orientation="vertical"
-    tools:context="com.bulic.MainActivity" >
+    tools:context="com.example.bulic.MainActivity" >
 
     <TextView
         android:id="@+id/text"

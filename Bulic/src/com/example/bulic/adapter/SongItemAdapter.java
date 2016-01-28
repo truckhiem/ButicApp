@@ -1,19 +1,24 @@
-package com.bulic.adapter;
+package com.example.bulic.adapter;
 
 import java.io.InputStream;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnTouchListener;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.bulic.model.YoutubeResponseModel;
+import com.example.bulic.BulicPlayer;
 import com.example.bulic.R;
+import com.example.bulic.model.YoutubeResponseModel;
+import com.example.bulic.utils.Contanst;
 
 public class SongItemAdapter extends LinearLayout{
 	
@@ -22,7 +27,7 @@ public class SongItemAdapter extends LinearLayout{
 		
 	}
 	
-	public SongItemAdapter(Context context, YoutubeResponseModel.Item songModel){
+	public SongItemAdapter(final Context context, final YoutubeResponseModel.Item songModel){
 		super(context);
 		LayoutInflater inflater = (LayoutInflater) context
 		        .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -42,6 +47,38 @@ public class SongItemAdapter extends LinearLayout{
 		}else{
 			txtSongName.setText(songModel.snippet.title);
 		}
+		LinearLayout viewSongItem = (LinearLayout) view.findViewById(R.id.item_song_view);
+		viewSongItem.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				String songID = songModel.contentDetails.bulletin.resourceId.videoId;
+				Intent intent = new Intent(context, BulicPlayer.class);
+				intent.putExtra(Contanst.SendIntent.VideoID, songID);
+				context.startActivity(intent);
+			}
+		});
+		
+		viewSongItem.setOnTouchListener(new OnTouchListener() {
+			
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+				System.out.println("motionevent: "+event.getAction());
+				switch (event.getAction()) {
+				case MotionEvent.ACTION_CANCEL:
+				case MotionEvent.ACTION_SCROLL:
+				case MotionEvent.ACTION_MOVE:
+				case MotionEvent.ACTION_UP:
+					((LinearLayout)v).setBackgroundColor(getResources().getColor(R.color.backgroud));					
+					break;
+
+				case MotionEvent.ACTION_DOWN:
+					((LinearLayout)v).setBackgroundColor(getResources().getColor(R.color.text_red));
+					break;
+				}
+				return false;
+			}
+		});
 	}
 	
 	private void loadImage(ImageView imgView, String strUrl){

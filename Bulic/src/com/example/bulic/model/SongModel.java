@@ -1,4 +1,4 @@
-package com.bulic.model;
+package com.example.bulic.model;
 
 public class SongModel {
 	

@@ -7,6 +7,7 @@
     <include layout="@layout/gray_line" />
 
     <LinearLayout
+        android:id="@+id/item_song_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/backgroud"

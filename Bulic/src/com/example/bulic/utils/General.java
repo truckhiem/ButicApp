@@ -1,4 +1,4 @@
-package com.bulic.utils;
+package com.example.bulic.utils;
 
 import java.io.BufferedReader;
 import java.io.IOException;

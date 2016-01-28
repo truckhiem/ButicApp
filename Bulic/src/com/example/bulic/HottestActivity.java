@@ -1,4 +1,4 @@
-package com.bulic;
+package com.example.bulic;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -12,14 +12,14 @@ import android.os.Message;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.bulic.adapter.PagerAdapter;
-import com.bulic.adapter.SongItemAdapter;
-import com.bulic.api.APIDefine;
-import com.bulic.api.APIRequest;
-import com.bulic.model.YoutubeResponseModel;
-import com.bulic.utils.Contanst;
-import com.bulic.utils.General;
 import com.example.bulic.R;
+import com.example.bulic.adapter.PagerAdapter;
+import com.example.bulic.adapter.SongItemAdapter;
+import com.example.bulic.api.APIDefine;
+import com.example.bulic.api.APIRequest;
+import com.example.bulic.model.YoutubeResponseModel;
+import com.example.bulic.utils.Contanst;
+import com.example.bulic.utils.General;
 import com.google.gson.Gson;
 
 public class HottestActivity extends Activity{

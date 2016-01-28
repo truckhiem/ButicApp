@@ -1,4 +1,4 @@
-package com.bulic.api;
+package com.example.bulic.api;
 
 import android.content.Context;
 import android.os.Handler;
@@ -10,7 +10,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.bulic.utils.General;
+import com.example.bulic.utils.General;
 
 public class APIRequest {
 	

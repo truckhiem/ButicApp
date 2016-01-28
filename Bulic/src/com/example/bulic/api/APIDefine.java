@@ -1,4 +1,4 @@
-package com.bulic.api;
+package com.example.bulic.api;
 
 public class APIDefine {
 	

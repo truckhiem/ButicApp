@@ -1,4 +1,4 @@
-package com.bulic.base;
+package com.example.bulic.base;
 
 import android.content.Context;
 import android.os.Bundle;

@@ -1,4 +1,4 @@
-package com.bulic;
+package com.example.bulic;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -8,8 +8,8 @@ import android.support.v4.view.ViewPager;
 import android.view.Gravity;
 import android.widget.TextView;
 
-import com.bulic.adapter.PagerAdapter;
 import com.example.bulic.R;
+import com.example.bulic.adapter.PagerAdapter;
 
 public class MainActivity extends FragmentActivity{
 	

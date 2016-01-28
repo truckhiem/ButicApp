@@ -1,4 +1,4 @@
-package com.bulic.fragment;
+package com.example.bulic.fragment;
 
 import java.util.ArrayList;
 
@@ -12,25 +12,26 @@ import android.os.Message;
 import android.view.View;
 import android.widget.LinearLayout;
 
-import com.bulic.adapter.SongItemAdapter;
-import com.bulic.adapter.TitleGroupAdapter;
-import com.bulic.api.APIDefine;
-import com.bulic.api.APIRequest;
-import com.bulic.base.BaseFragmentActivity;
-import com.bulic.model.YoutubeResponseModel;
-import com.bulic.model.SongModel;
-import com.bulic.utils.General;
 import com.example.bulic.R;
+import com.example.bulic.adapter.SongItemAdapter;
+import com.example.bulic.adapter.TitleGroupAdapter;
+import com.example.bulic.api.APIDefine;
+import com.example.bulic.api.APIRequest;
+import com.example.bulic.base.BaseFragmentActivity;
+import com.example.bulic.model.SongModel;
+import com.example.bulic.model.YoutubeResponseModel;
+import com.example.bulic.utils.General;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 
-public class Frg_Hottest extends BaseFragmentActivity{
+public class Frg_Trending extends BaseFragmentActivity{
 	
 	private ArrayList<YoutubeResponseModel> lstCatalogHottest;
 	private int countResponse = 0;
 	private String[] arrLstGroup;
+	private ArrayList<String> lstUrl;
 	
-	public Frg_Hottest(Context mContext) {
+	public Frg_Trending(Context mContext) {
 		super(mContext);
 	}
 
@@ -39,12 +40,8 @@ public class Frg_Hottest extends BaseFragmentActivity{
 	@Override
 	public void initData() {
 		lstCatalogHottest = new ArrayList<YoutubeResponseModel>();
-		ArrayList<String> lstUrl = defineUrlRequest();
-		
-		for (int i = 0; i < lstUrl.size(); i++) {
-			APIRequest request = new APIRequest(mContext);
-			request.requestGET(lstUrl.get(i), mHandlerGetPlaylist);	
-		}
+		lstUrl = defineUrlRequest();
+		getDataFromYoutube();
 	}
 
 	private ArrayList<String> defineUrlRequest() {
@@ -58,7 +55,7 @@ public class Frg_Hottest extends BaseFragmentActivity{
 			if(arrHottestApiKey != null){
 				for (int i = 0; i < arrHottestApiKey.length(); i++) {
 					JSONObject jsonObj = arrHottestApiKey.getJSONObject(i);
-					lstUrl.add(String.format(APIDefine.URL_GET_ACTIVITY, jsonObj.get(arrLstGroup[i]),3));
+					lstUrl.add(String.format(APIDefine.URL_GET_PLAYLIST, jsonObj.get(arrLstGroup[i]),3));
 				}
 			}
 		} catch (JSONException e) {
@@ -67,16 +64,22 @@ public class Frg_Hottest extends BaseFragmentActivity{
 		return lstUrl;
 	}
 
-	private void bindingData() {
-		rootLayout.removeAllViews();
-		for (int i = 0; i < lstCatalogHottest.size(); i++) {
-			TitleGroupAdapter groupAdapter = new TitleGroupAdapter(mContext, arrLstGroup[i]);
-			rootLayout.addView(groupAdapter);
-			for (int j = 0; j < 3; j++) {
-				SongItemAdapter songItemAdapter = new SongItemAdapter(mContext, lstCatalogHottest.get(i).items.get(j));
-				rootLayout.addView(songItemAdapter);
-			}
+	private void bindingData(){
+		TitleGroupAdapter groupAdapter = new TitleGroupAdapter(mContext, arrLstGroup[countResponse]);
+		rootLayout.addView(groupAdapter);
+		for (int j = 0; j < 3; j++) {
+			SongItemAdapter songItemAdapter = new SongItemAdapter(mContext, lstCatalogHottest.get(countResponse).items.get(j));
+			rootLayout.addView(songItemAdapter);
 		}
+		countResponse++;
+		if(countResponse >= arrLstGroup.length)
+			return;
+		getDataFromYoutube();
+	}
+	
+	private void getDataFromYoutube(){
+		APIRequest request = new APIRequest(mContext);
+		request.requestGET(lstUrl.get(countResponse), mHandlerGetPlaylist);
 	}
 
 	@Override
@@ -92,7 +95,6 @@ public class Frg_Hottest extends BaseFragmentActivity{
 	private Handler mHandlerGetPlaylist = new Handler(){
 		@Override
 		public void handleMessage(Message msg) {
-			countResponse ++;
 			switch (msg.what) {
 			case APIDefine.RESPONSE_OK:
 				Gson gson = new Gson();
@@ -102,7 +104,7 @@ public class Frg_Hottest extends BaseFragmentActivity{
 			case APIDefine.RESPONSE_FAIL:
 				break;
 			}
-			if(countResponse == arrLstGroup.length){
+			if(countResponse < arrLstGroup.length){
 				bindingData();
 			}
 		}

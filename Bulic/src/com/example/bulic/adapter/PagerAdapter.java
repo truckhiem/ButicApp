@@ -1,13 +1,13 @@
-package com.bulic.adapter;
+package com.example.bulic.adapter;
 
 import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-import com.bulic.fragment.Frg_Hottest;
-import com.bulic.fragment.Frg_Trending;
 import com.example.bulic.R;
+import com.example.bulic.fragment.Frg_Hottest;
+import com.example.bulic.fragment.Frg_Trending;
 import com.google.api.services.youtube.YouTube.Videos.GetRating;
 
 public class PagerAdapter extends FragmentStatePagerAdapter {
