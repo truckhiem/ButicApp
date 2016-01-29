@@ -7,13 +7,14 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 
 import com.example.bulic.R;
 import com.example.bulic.fragment.Frg_Hottest;
+import com.example.bulic.fragment.Frg_Playlist;
 import com.example.bulic.fragment.Frg_Trending;
 import com.google.api.services.youtube.YouTube.Videos.GetRating;
 
 public class PagerAdapter extends FragmentStatePagerAdapter {
 	
 	private Context mContext;
-	private Fragment frgHottest, frgTrending;
+	private Fragment frgHottest, frgTrending, frgPlaylist;
 	private String[] lstPageTitle;
     
 	public PagerAdapter(FragmentManager fm) {
@@ -30,19 +31,23 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
 		lstPageTitle = mContext.getResources().getStringArray(R.array.list_tab_bar);
 		frgHottest = new Frg_Hottest(mContext);
 		frgTrending = new Frg_Trending(mContext);
+		frgPlaylist = new Frg_Playlist(mContext);
 	}
 
 	@Override
     public Fragment getItem(int i) {
-		if(i == 0){
+		switch (i) {
+		case 0:
 			return frgHottest;
+		case 1:
+			 return frgTrending;
 		}
-       return frgTrending;
+		return frgPlaylist;
     }
 
     @Override
     public int getCount() {
-        return 2;
+        return 3;
     }
 
     @Override

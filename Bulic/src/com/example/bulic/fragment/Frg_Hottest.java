@@ -7,6 +7,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
@@ -107,14 +108,51 @@ public class Frg_Hottest extends BaseFragmentActivity{
 				Gson gson = new Gson();
 				YoutubeResponseModel youtubeResponseModel = gson.fromJson(msg.obj.toString(), YoutubeResponseModel.class);
 				lstCatalogHottest.add(youtubeResponseModel);
+				if(countResponse < arrLstGroup.length){
+					bindingData();
+				}
 				break;
 			case APIDefine.RESPONSE_FAIL:
+				YoutubeResponseModel youtubeResponseModelEmpty = new YoutubeResponseModel();
+				lstCatalogHottest.add(youtubeResponseModelEmpty);
+				countResponse++;
+				if(countResponse >= arrLstGroup.length){
+					mProgressBar.setVisibility(View.GONE);
+					return;
+				}
+				getDataFromYoutube();
 				break;
-			}
-			if(countResponse < arrLstGroup.length){
-				bindingData();
 			}
 		}
 	};
+	
+	@Override
+	public void loadDataSaved(Bundle savedInstanceState) {
+		lstCatalogHottest = savedInstanceState.getParcelableArrayList(KEY_STATE_LST_CATALOG);
+		countResponse = savedInstanceState.getInt(KEY_STATE_COUNT_RESPONSE);
+		if(countResponse >= lstCatalogHottest.size()){
+			countResponse = lstCatalogHottest.size() - 1;
+		}
+		for (int i = 0; i < lstCatalogHottest.size(); i++) {
+			TitleGroupAdapter groupAdapter = new TitleGroupAdapter(mContext, arrLstGroup[i]);
+			rootLayout.addView(groupAdapter);
+			for (int j = 0; j < 3; j++) {
+				SongItemAdapter songItemAdapter = new SongItemAdapter(mContext, lstCatalogHottest.get(i).items.get(j));
+				rootLayout.addView(songItemAdapter);
+			}
+		}
+		countResponse++;
+		if(countResponse >= arrLstGroup.length){
+			mProgressBar.setVisibility(View.GONE);
+			return;
+		}
+		getDataFromYoutube();
+	}
+	
+	@Override
+	public void saveData(Bundle outState) {
+		outState.putParcelableArrayList(KEY_STATE_LST_CATALOG, lstCatalogHottest);
+		outState.putInt(KEY_STATE_COUNT_RESPONSE, countResponse);
+	}
 	
 }

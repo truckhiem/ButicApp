@@ -15,6 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 
 import com.example.bulic.R;
+import com.example.bulic.adapter.PlaylistItemAdapter;
 import com.example.bulic.adapter.SongItemAdapter;
 import com.example.bulic.adapter.TitleGroupAdapter;
 import com.example.bulic.api.APIDefine;
@@ -26,7 +27,7 @@ import com.example.bulic.utils.General;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 
-public class Frg_Trending extends BaseFragmentActivity{
+public class Frg_Playlist extends BaseFragmentActivity{
 	
 	private ArrayList<YoutubeResponseModel> lstCatalogHottest;
 	private int countResponse = 0;
@@ -34,7 +35,7 @@ public class Frg_Trending extends BaseFragmentActivity{
 	private ArrayList<String> lstUrl;
 	private ProgressBar mProgressBar;
 	
-	public Frg_Trending(Context mContext) {
+	public Frg_Playlist(Context mContext) {
 		super(mContext);
 	}
 
@@ -49,13 +50,13 @@ public class Frg_Trending extends BaseFragmentActivity{
 
 	private ArrayList<String> defineUrlRequest() {
 		ArrayList<String> lstUrl = new ArrayList<String>();
-		lstUrl.add(String.format(APIDefine.URL_GET_ACTIVITY, APIDefine.ID_NEWEST, 20));
+		lstUrl.add(String.format(APIDefine.URL_GET_PLAYLIST, APIDefine.ID_PLAYLIST, 20));
 		return lstUrl;
 	}
 
 	private void bindingData(){
 		for (int j = 0; j < 20; j++) {
-			SongItemAdapter songItemAdapter = new SongItemAdapter(mContext, lstCatalogHottest.get(0).items.get(j));
+			PlaylistItemAdapter songItemAdapter = new PlaylistItemAdapter(mContext, lstCatalogHottest.get(0).items.get(j));
 			rootLayout.addView(songItemAdapter);
 		}
 		mProgressBar.setVisibility(View.GONE);

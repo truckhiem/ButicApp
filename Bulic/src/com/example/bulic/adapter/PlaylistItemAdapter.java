@@ -16,18 +16,20 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.bulic.BulicPlayer;
+import com.example.bulic.HottestActivity;
 import com.example.bulic.R;
+import com.example.bulic.api.APIDefine;
 import com.example.bulic.model.YoutubeResponseModel;
 import com.example.bulic.utils.Contanst;
 
-public class SongItemAdapter extends LinearLayout{
+public class PlaylistItemAdapter extends LinearLayout{
 	
-	public SongItemAdapter(Context context) {
+	public PlaylistItemAdapter(Context context) {
 		super(context);
 		
 	}
 	
-	public SongItemAdapter(final Context context, final YoutubeResponseModel.Item songModel){
+	public PlaylistItemAdapter(final Context context, final YoutubeResponseModel.Item songModel){
 		super(context);
 		LayoutInflater inflater = (LayoutInflater) context
 		        .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -52,14 +54,14 @@ public class SongItemAdapter extends LinearLayout{
 			
 			@Override
 			public void onClick(View v) {
-				String songID = "";
-				if(songModel.contentDetails.bulletin != null){
-					songID = songModel.contentDetails.bulletin.resourceId.videoId;
-				}else{
-					songID = songModel.contentDetails.videoId;
-				}
-				Intent intent = new Intent(context, BulicPlayer.class);
-				intent.putExtra(Contanst.SendIntent.VideoID, songID);
+//				String songID = songModel.contentDetails.bulletin.resourceId.videoId;
+//				Intent intent = new Intent(context, BulicPlayer.class);
+//				intent.putExtra(Contanst.SendIntent.VideoID, songID);
+//				context.startActivity(intent);
+				
+				Intent intent = new Intent(context, HottestActivity.class);
+				intent.putExtra(Contanst.SendIntent.PlaylistID, String.format(APIDefine.URL_GET_PLAYLIST_ITEM, songModel.id,20));
+				intent.putExtra(Contanst.SendIntent.TitleGroup, songModel.snippet.title);
 				context.startActivity(intent);
 			}
 		});

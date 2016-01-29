@@ -24,7 +24,7 @@ import com.google.gson.Gson;
 
 public class HottestActivity extends Activity{
 	
-	private String titleGroupName;
+	private String titleGroupName,playlistID;
 	private Context mContext;
 	private TextView titleGroup;
 	private PagerAdapter mPagerAdapter;
@@ -44,7 +44,7 @@ public class HottestActivity extends Activity{
 		titleGroup.setText(titleGroupName);		
 		
 		APIRequest request = new APIRequest(mContext);
-		request.requestGET(defineUrlRequest(), mHandlerGetPlaylist);	
+		request.requestGET(playlistID, mHandlerGetPlaylist);	
 	}
 	
 	private String defineUrlRequest() {
@@ -73,6 +73,7 @@ public class HottestActivity extends Activity{
 
 	private void initData() {
 		mContext = this;
+		playlistID = getIntent().getStringExtra(Contanst.SendIntent.PlaylistID);
 		titleGroupName = getIntent().getStringExtra(Contanst.SendIntent.TitleGroup);
 	}
 

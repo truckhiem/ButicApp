@@ -8,7 +8,10 @@ public class APIDefine {
 	public static final String BASE_URL = "https://www.googleapis.com/youtube/v3/";
 	public static final String API_KEY = "&key=AIzaSyCQQBtu78eJ9cz-ARMyYKA6ayW196x5PhE";
 	public static final String URL_GET_PLAYLIST = "playlists?fields=items(contentDetails,id,snippet(title,thumbnails)),nextPageToken,prevPageToken&channelId=%s&part=id,snippet,contentDetails&maxResults=%s";
+	public static final String URL_GET_PLAYLIST_ITEM = "playlistItems?fields=items(contentDetails,id,snippet(title,thumbnails)),nextPageToken,prevPageToken&playlistId=%s&part=id,snippet,contentDetails&maxResults=%s";
 	public static final String URL_GET_ACTIVITY = "activities?fields=items(contentDetails,id,snippet(title,thumbnails)),nextPageToken,prevPageToken&channelId=%s&part=id,snippet,contentDetails&maxResults=%s";
+	public static final String ID_NEWEST = "UC-9-kyTW8ZkZNDHQJ6FgpwQ";
+	public static final String ID_PLAYLIST = "UC-9-kyTW8ZkZNDHQJ6FgpwQ";
 	public static final String URL_PLAYLIST_ITEM = "playlistItems?fields=items(contentDetails,id,snippet(title,thumbnails))&part=id,snippet,contentDetails&playlistId=PLFgquLnL59andd8u3e-Ji8bBmM1vX8uHV";
 //	public static final String URL_PLAYLIST_ITEM = "https://www.googleapis.com/youtube/v3/playlistItems?part=contentDetails&playlistId={PLAYLIST_ID}";
 	

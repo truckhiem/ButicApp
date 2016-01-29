@@ -3,7 +3,10 @@ package com.example.bulic.model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class YoutubeResponseModel {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class YoutubeResponseModel implements Parcelable {
 	
 	public String nextPageToken;
 	public List<Item> items = new ArrayList<YoutubeResponseModel.Item>();
@@ -46,6 +49,18 @@ public class YoutubeResponseModel {
 	public class ResourceId{
 		public String kind;
 		public String videoId;
+	}
+
+	@Override
+	public int describeContents() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void writeToParcel(Parcel dest, int flags) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }
